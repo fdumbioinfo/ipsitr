@@ -1,0 +1,39 @@
+Package: ipsitr
+Title: ipsitr
+Version: 1.1.1
+Authors@R: 
+    person(given = "Florent",
+           family = "Dumont",
+           role = c("aut", "cre"),
+           email = "florent.dumont@universite-paris-saclay.fr")
+Description: UMS IPSIT package.
+License: GPL-3
+Depends: 
+    R (>= 4.0),
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    affyio,
+    Biobase,
+    doParallel,
+    edgeR,
+    dplyr,
+    foreach,
+    magrittr,
+    moal,
+    ggplot2,
+    gplots,
+    graphics,
+    gridExtra,
+    parallel,
+    limma,
+    oligo,
+    rlang,
+    stats,
+    utils,
+    rvest,
+    xml2,
+    xcms,
+    stringr,
+    biomaRt
