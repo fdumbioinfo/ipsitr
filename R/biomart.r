@@ -10,7 +10,7 @@
 #' @importFrom stringr str_to_lower
 #' @importFrom utils head
 #' @importFrom rlang .data
-#' @import moal
+#' @import moal orthoinfo
 #' @import biomaRt
 #' @export
 biomart <- function( species = NULL )
@@ -35,8 +35,8 @@ biomart <- function( species = NULL )
     "TranscriptType","TranscriptCount","Syn","NCBIGeneID","UniProtSP","UniProtTr") -> Header0
   a2 %>% setNames(Header0) -> a2
   a2 %>% head
-  a2 %>% group_by(.data$ENSGID) %>%
-    mutate(
+  a2 %>% dplyr::group_by(.data$ENSGID) %>%
+    dplyr::mutate(
       ENSTIDs = paste0(.data$ENSTID %>% unique ,collapse = "|"),
       ENSPIDs = paste0(.data$ENSPID %>% unique ,collapse = "|"),
       Synonyms = paste0(.data$Syn %>% unique ,collapse = "|")) %>% dplyr::select(.data$ENSTIDs,.data$ENSPIDs,.data$Synonyms) %>% data.frame -> Collapse0

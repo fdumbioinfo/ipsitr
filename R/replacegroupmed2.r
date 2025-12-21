@@ -10,8 +10,9 @@
 #' # replacegroupmed(dat)
 #' @author Florent Dumont <florent.dumont@universite-paris-saclay.fr>
 #' @importFrom magrittr %>%
+#' @importFrom graphics hist
 #' @importFrom foreach  %do% foreach
-#' @importFrom stats median setNames
+#' @importFrom stats median setNames quantile
 #' @importFrom edgeR calcNormFactors
 #' @export
 replacegroupmed2 <- function( dat , value = 0 , factor = NULL )
@@ -23,7 +24,7 @@ replacegroupmed2 <- function( dat , value = 0 , factor = NULL )
   Coord$col %>% table
   factor %>% table -> FactorTable
   factor %>% levels %>% length -> NGroup
-  dat %>% unlist %>% quantile -> QuantAll
+  dat %>% unlist %>% stats::quantile(.) -> QuantAll
   FactorTableSel <- foreach(i=1:length(FactorTable)) %do%
     {
       FactorTable[i] %>% names %>% paste("^",.,"$",sep="") -> Grep0
@@ -31,7 +32,7 @@ replacegroupmed2 <- function( dat , value = 0 , factor = NULL )
     }
   dat %>% apply(1,quantile) -> QuantRow
   dat %>% apply(1,quantile) -> QuantCol
-  dat %>% unlist %>% hist(breaks = 10) -> h0
+  dat %>% unlist %>% graphics::hist(breaks = 10) -> h0
   h0 %>% class
   
   dat %>% apply(1,hist,breaks=100) -> QuantCol10
